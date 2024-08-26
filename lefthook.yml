@@ -18,3 +18,9 @@ pre-commit:
     eslint:
       glob: "*.{js,jsx}"
       run: npm run lint
+      "prettier/prettier": [
+      "error",
+      {
+    "endOfLine": "auto"
+    }
+]
