@@ -3,13 +3,10 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./router";
-import { EasyProvider } from "./context/useGameData.context";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <EasyProvider>
-      <RouterProvider router={router}></RouterProvider>
-    </EasyProvider>
+    <RouterProvider router={router}></RouterProvider>
   </React.StrictMode>,
 );

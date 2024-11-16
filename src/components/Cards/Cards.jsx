@@ -1,11 +1,10 @@
 import { shuffle } from "lodash";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { generateDeck } from "../../utils/cards";
 import styles from "./Cards.module.css";
 import { EndGameModal } from "../../components/EndGameModal/EndGameModal";
 import { Button } from "../../components/Button/Button";
 import { Card } from "../../components/Card/Card";
-import { EasyContext } from "../../context/useGameData.context";
 
 // Игра закончилась
 const STATUS_LOST = "STATUS_LOST";
@@ -42,7 +41,6 @@ function getTimerValue(startDate, endDate) {
  * previewSeconds - сколько секунд пользователь будет видеть все карты открытыми до начала игры
  */
 export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
-  const { setTries, tries, isEasyMode } = useContext(EasyContext);
   // В cards лежит игровое поле - массив карт и их состояние открыта\закрыта
   const [cards, setCards] = useState([]);
   // Текущий статус игры
@@ -129,26 +127,10 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
 
     // "Игрок проиграл", т.к на поле есть две открытые карты без пары
     if (playerLost) {
-      if (isEasyMode) {
-        setTries(prevTries => prevTries - 1);
-        if (tries - 1 <= 0) {
-          finishGame(STATUS_LOST);
-        } else {
-          // Закрываем только карты без пары
-          setTimeout(() => {
-            setCards(
-              nextCards.map(card =>
-                openCardsWithoutPair.some(openCard => openCard.id === card.id) ? { ...card, open: false } : card,
-              ),
-            );
-          }, 2000); // Задержка в 2 секундуы чтобы игрок успел увидеть вторую карту
-        }
-      } else {
-        // Сложный режим: закрываем только карты без пары, не уменьшаем количество попыток
-        finishGame(STATUS_LOST); // Завершаем игру при одной ошибке в сложном режиме
-      }
+      finishGame(STATUS_LOST);
       return;
     }
+
     // ... игра продолжается
   };
 
@@ -214,7 +196,6 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
           )}
         </div>
         {status === STATUS_IN_PROGRESS ? <Button onClick={resetGame}>Начать заново</Button> : null}
-        {isEasyMode && <span className={styles.SpanCards}>Количество жизней: {tries}</span>}
       </div>
 
       <div className={styles.cards}>

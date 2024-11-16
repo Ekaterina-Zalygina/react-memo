@@ -62,12 +62,3 @@
 .levelLink:visited {
   color: #0080c1;
 }
-
-.EasyMode {
-  display: flex;
-}
-
-.LabelLight {
-  color: #004980;
-  font-family: StratosSkyeng;
-}

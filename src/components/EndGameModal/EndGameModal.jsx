@@ -4,9 +4,28 @@ import { Button } from "../Button/Button";
 
 import deadImageUrl from "./images/dead.png";
 import celebrationImageUrl from "./images/celebration.png";
+import { useLeaderboard } from "../../pages/LeaderboardPage/UseLeaderboard";
+import { useNavigate } from "react-router-dom";
+import { apiProvider } from "../../api";
+import { useState } from "react";
 
 export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, onClick }) {
-  const title = isWon ? "Вы победили!" : "Вы проиграли!";
+  const leaderboard = useLeaderboard();
+  const [name, setName] = useState("");
+
+  const navigate = useNavigate();
+
+  function isInLeaderboard() {
+    const last = leaderboard[leaderboard.length - 1];
+    if (!last) return false;
+    return last.time > gameDurationSeconds;
+  }
+
+  function getTitle() {
+    if (!isWon) return "Вы проиграли!";
+    if (isInLeaderboard()) return "Вы попали в лидерборд!";
+    return "Вы победили!";
+  }
 
   const imgSrc = isWon ? celebrationImageUrl : deadImageUrl;
 
@@ -15,13 +34,30 @@ export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, 
   return (
     <div className={styles.modal}>
       <img className={styles.image} src={imgSrc} alt={imgAlt} />
-      <h2 className={styles.title}>{title}</h2>
+      <h2 className={styles.title}>{getTitle()}</h2>
+      {isInLeaderboard() && <input value={name} onChange={e => setName(e.target.value)} type="text" name="" id="" />}
       <p className={styles.description}>Затраченное время:</p>
       <div className={styles.time}>
         {gameDurationMinutes.toString().padStart("2", "0")}.{gameDurationSeconds.toString().padStart("2", "0")}
       </div>
 
       <Button onClick={onClick}>Начать сначала</Button>
+      <div
+        onClick={() => {
+          if (!name || !isInLeaderboard()) {
+            navigate("/leaderboard");
+            return;
+          }
+          apiProvider
+            .addToLeaderboard({
+              name,
+              time: gameDurationSeconds,
+            })
+            .then(() => navigate("/leaderboard"));
+        }}
+      >
+        Перейти в лидерборд
+      </div>
     </div>
   );
 }
