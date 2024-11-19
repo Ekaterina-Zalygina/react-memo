@@ -1,16 +1,198 @@
-﻿.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    color: #c2f5ff;
+﻿/* .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  color: #c2f5ff;
 }
 
 .line {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 52px;
 }
 
 .table {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
 }
 
+.leaderboard {
+  width: 127px;
+  height: 32px;
+  top: 61px;
+  left: 40px;
+  gap: 0px;
+  opacity: 0px;
+  font-family: Roboto;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #ffffff;
+}
+
+.playButton {
+  width: 246px;
+  height: 50px;
+  top: 52px;
+  left: 738px;
+  gap: 0px;
+  border-radius: 12px 0px 0px 0px;
+  opacity: 0px;
+}
+
+.position {
+  width: 178px;
+  height: 32px;
+  gap: 0px;
+  opacity: 0px;
+  font-family: Poppins;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #999999;
+  background-color: #ffffff;
+}
+
+.user {
+  width: 324px;
+  height: 32px;
+  gap: 0px;
+  opacity: 0px;
+  font-family: Poppins;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #999999;
+  background-color: #ffffff;
+}
+
+.time {
+  width: 102px;
+  height: 32px;
+  gap: 0px;
+  opacity: 0px;
+  font-family: Poppins;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #999999;
+  background-color: #ffffff;
+} */
+
+/* Общие стили */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  color: #ffffff;
+  font-family: "Roboto", sans-serif;
+}
+
+/* Заголовок и кнопка */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-family: Roboto;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  width: 127px;
+  height: 32px;
+  top: 61px;
+  left: 40px;
+  gap: 0px;
+  opacity: 0px;
+}
+
+.playButton {
+  width: 246px;
+  height: 50px;
+  top: 52px;
+  left: 738px;
+  gap: 0px;
+  border-radius: 12px 0px 0px 0px;
+  opacity: 0px;
+  font-family: Roboto;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+  text-align: center;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+
+/* Таблица */
+.table {
+  display: grid;
+  grid-template-columns: 100px 1fr 100px;
+  gap: 10px;
+  background-color: #ffffff;
+}
+
+.headerRow {
+  display: contents;
+  font-weight: bold;
+  /* background-color: #ffffff; */
+  padding: 10px;
+  border-radius: 4px;
+  /* max-width: 944px; */
+}
+
+.row {
+  display: contents;
+  align-items: center;
+  /* background-color: #ffffff;
+  color: #124073; */
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 5px;
+}
+
+.position,
+.user,
+.time {
+  padding: 10px;
+  text-align: left;
+  color: #000000;
+  font-family: Poppins;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+
+.positionHeader,
+.userHeader,
+.timeHeader {
+  color: #999999;
+  padding: 10px;
+  border-radius: 4px;
+  font-family: Poppins;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}

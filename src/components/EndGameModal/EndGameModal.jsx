@@ -5,7 +5,7 @@ import { Button } from "../Button/Button";
 import deadImageUrl from "./images/dead.png";
 import celebrationImageUrl from "./images/celebration.png";
 import { useLeaderboard } from "../../pages/LeaderboardPage/UseLeaderboard";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { apiProvider } from "../../api";
 import { useState } from "react";
 
@@ -56,7 +56,7 @@ export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, 
             .then(() => navigate("/leaderboard"));
         }}
       >
-        Перейти в лидерборд
+        <Link className={styles.linkLeaderboard}>Перейти к лидерборду</Link>
       </div>
     </div>
   );
