@@ -19,8 +19,14 @@
   border: none;
 
   cursor: pointer;
-}
 
-.button:hover {
-  background: #7ac100cc;
+  &:hover {
+    background-color: #7ac100cc;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
 }

@@ -64,11 +64,12 @@ export function LeaderboardPage() {
       </div>
 
       <div className={styles.table}>
-        <div className={styles.headerRow}>
+        <div className={`${styles.row} ${styles.headerRow}`}>
           <div className={styles.positionHeader}>Позиция</div>
           <div className={styles.userHeader}>Пользователь</div>
           <div className={styles.timeHeader}>Время</div>
         </div>
+
         {leaderboard
           .sort((x, y) => x.time - y.time)
           .map((item, index) => (

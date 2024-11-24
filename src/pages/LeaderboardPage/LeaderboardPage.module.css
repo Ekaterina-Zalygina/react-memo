@@ -142,29 +142,33 @@
 
 /* Таблица */
 .table {
-  display: grid;
-  grid-template-columns: 100px 1fr 100px;
+  display: flex;
+  flex-direction: column;
   gap: 10px;
-  background-color: #ffffff;
 }
 
 .headerRow {
-  display: contents;
   font-weight: bold;
-  /* background-color: #ffffff; */
-  padding: 10px;
-  border-radius: 4px;
-  /* max-width: 944px; */
 }
 
 .row {
-  display: contents;
+  display: flex;
   align-items: center;
-  /* background-color: #ffffff;
-  color: #124073; */
   border-radius: 4px;
   padding: 10px;
-  margin-bottom: 5px;
+  background-color: #ffffff;
+
+  & > *:nth-child(1) {
+    flex-basis: 15%;
+  }
+
+  & > *:nth-child(2) {
+    flex-grow: 1;
+  }
+
+  & > *:nth-child(3) {
+    flex-basis: 15%;
+  }
 }
 
 .position,

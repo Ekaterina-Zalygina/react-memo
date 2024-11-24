@@ -9,13 +9,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { apiProvider } from "../../api";
 import { useState } from "react";
 
-export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, onClick }) {
+export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, onClick, hard }) {
   const leaderboard = useLeaderboard();
   const [name, setName] = useState("");
 
   const navigate = useNavigate();
 
   function isInLeaderboard() {
+    if (!hard) return false;
+    if (!isWon) return false;
     const last = leaderboard[leaderboard.length - 1];
     if (!last) return false;
     return last.time > gameDurationSeconds;
@@ -35,7 +37,9 @@ export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, 
     <div className={styles.modal}>
       <img className={styles.image} src={imgSrc} alt={imgAlt} />
       <h2 className={styles.title}>{getTitle()}</h2>
-      {isInLeaderboard() && <input value={name} onChange={e => setName(e.target.value)} type="text" name="" id="" />}
+      {isInLeaderboard() && (
+        <input placeholder="Ваше имя" value={name} onChange={e => setName(e.target.value)} type="text" name="" id="" />
+      )}
       <p className={styles.description}>Затраченное время:</p>
       <div className={styles.time}>
         {gameDurationMinutes.toString().padStart("2", "0")}.{gameDurationSeconds.toString().padStart("2", "0")}
