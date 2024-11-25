@@ -36,6 +36,46 @@
   color: #fff;
 }
 
+.eyeButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.eyeButton[data-disabled="true"] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.eyeButton:hover img {
+  border-radius: 50%;
+  box-shadow: 0px 0px 10px #fff;
+}
+
+.action {
+  position: relative;
+}
+
+.tooltip {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translate(-50%, 0);
+  opacity: 0;
+  transition: all 0.3s ease 0s;
+  background: #c2f5ff;
+  padding: 20px;
+  text-align: center;
+  z-index: 1;
+  font-family: StratosSkyeng;
+  max-width: 220px;
+  border-radius: 12px;
+}
+
+.action:hover .tooltip {
+  opacity: 1;
+}
+
 .timer {
   display: flex;
   align-items: end;

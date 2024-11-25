@@ -9,7 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { apiProvider } from "../../api";
 import { useState } from "react";
 
-export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, onClick, hard }) {
+export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, onClick, hard, achieves }) {
   const leaderboard = useLeaderboard();
   const [name, setName] = useState("");
 
@@ -56,6 +56,7 @@ export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, 
             .addToLeaderboard({
               name,
               time: gameDurationSeconds,
+              achievements: achieves,
             })
             .then(() => navigate("/leaderboard"));
         }}

@@ -5,6 +5,7 @@ import styles from "./Cards.module.css";
 import { EndGameModal } from "../../components/EndGameModal/EndGameModal";
 import { Button } from "../../components/Button/Button";
 import { Card } from "../../components/Card/Card";
+import eyePath from "./eye.png";
 
 // Игра закончилась
 const STATUS_LOST = "STATUS_LOST";
@@ -13,6 +14,10 @@ const STATUS_WON = "STATUS_WON";
 const STATUS_IN_PROGRESS = "STATUS_IN_PROGRESS";
 // Начало игры: игрок видит все карты в течении нескольких секунд
 const STATUS_PREVIEW = "STATUS_PREVIEW";
+
+function isPair(card1, card2) {
+  return card1.rank === card2.rank && card1.suit === card2.suit;
+}
 
 function getTimerValue(startDate, endDate) {
   if (!startDate && !endDate) {
@@ -53,6 +58,8 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isEasy = false }) {
   // Дата конца игры
   const [gameEndDate, setGameEndDate] = useState(null);
 
+  const [alohomoraUsed, setAlohomoraUsed] = useState(false);
+
   // Стейт для таймера, высчитывается в setInteval на основе gameStartDate и gameEndDate
   const [timer, setTimer] = useState({
     seconds: 0,
@@ -71,6 +78,7 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isEasy = false }) {
     setStatus(STATUS_IN_PROGRESS);
   }
   function resetGame() {
+    setAlohomoraUsed(false);
     setGameStartDate(null);
     setGameEndDate(null);
     setTimer(getTimerValue(null, null));
@@ -191,7 +199,6 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isEasy = false }) {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h3 className={styles.title}>Осталось попыток: {tries}</h3>
         <div className={styles.timer}>
           {status === STATUS_PREVIEW ? (
             <div>
@@ -212,8 +219,46 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isEasy = false }) {
             </>
           )}
         </div>
+
+        <div className={styles.action}>
+          <button
+            className={styles.eyeButton}
+            disabled={alohomoraUsed || status === STATUS_PREVIEW}
+            data-disabled={alohomoraUsed || status === STATUS_PREVIEW}
+            onClick={() => {
+              setAlohomoraUsed(true);
+              const firstCard = cards.find(card => !card.open);
+              const firstCardIndex = cards.indexOf(firstCard);
+              const secondCard = cards.slice(firstCardIndex + 1).find(card => isPair(firstCard, card));
+              const secondCardIndex = cards.indexOf(secondCard);
+
+              if (firstCard && secondCard) {
+                const updated = [...cards];
+                updated[firstCardIndex].open = true;
+                updated[secondCardIndex].open = true;
+
+                setCards(updated);
+
+                const isPlayerWon = updated.every(card => card.open);
+
+                if (isPlayerWon) {
+                  finishGame(STATUS_WON);
+                }
+              }
+            }}
+          >
+            <img src={eyePath} alt="" />
+          </button>
+          <div className={styles.tooltip}>
+            <h4 style={{ marginBottom: "10px" }}>Алохомора</h4>
+            <p>Открывается случайная пара карт.</p>
+          </div>
+        </div>
+
         {status === STATUS_IN_PROGRESS ? <Button onClick={resetGame}>Начать заново</Button> : null}
       </div>
+
+      <h3 className={styles.title}>Осталось попыток: {tries}</h3>
 
       <div className={styles.cards}>
         {cards.map(card => (
@@ -230,6 +275,7 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isEasy = false }) {
       {isGameEnded ? (
         <div className={styles.modalContainer}>
           <EndGameModal
+            achieves={alohomoraUsed ? [] : [1]}
             isWon={status === STATUS_WON}
             gameDurationSeconds={timer.seconds}
             gameDurationMinutes={timer.minutes}

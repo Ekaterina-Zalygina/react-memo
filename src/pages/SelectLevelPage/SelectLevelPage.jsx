@@ -30,7 +30,7 @@ export function SelectLevelPage() {
           </li>
         </ul>
 
-        <label>
+        <label style={{ marginBottom: 10 }}>
           <input type="checkbox" onChange={() => setEasyMode(!isEasyMode)} value={isEasyMode} />
           <span>Легкий режим (3 жизни)</span>
         </label>
@@ -48,7 +48,9 @@ export function SelectLevelPage() {
           Играть
         </Button>
 
-        <Link to="/leaderboard">Перейти к лидерборду</Link>
+        <Link to="/leaderboard" style={{ marginTop: 40 }}>
+          Перейти к лидерборду
+        </Link>
       </div>
     </div>
   );

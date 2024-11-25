@@ -158,17 +158,14 @@
   padding: 10px;
   background-color: #ffffff;
 
-  & > *:nth-child(1) {
-    flex-basis: 15%;
+  & > * {
+    flex-basis: 25%;
   }
+}
 
-  & > *:nth-child(2) {
-    flex-grow: 1;
-  }
-
-  & > *:nth-child(3) {
-    flex-basis: 15%;
-  }
+.achievements {
+  display: flex;
+  gap: 12px;
 }
 
 .position,
