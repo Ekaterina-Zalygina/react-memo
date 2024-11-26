@@ -10,6 +10,8 @@ import styles from "./LeaderboardPage.module.css";
 export function LeaderboardPage() {
   const leaderboard = useLeaderboard();
 
+  console.log(leaderboard);
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -36,8 +38,8 @@ export function LeaderboardPage() {
               <div className={styles.position}>#{index + 1}</div>
               <div className={styles.user}>{item.name}</div>
               <div className={styles.achievements}>
-                <img src={magicBall} alt="" />
-                <img src={puzzle} alt="" />
+                {item.achievements.includes(1) && <img src={magicBall} alt="" />}
+                {item.achievements.includes(2) && <img src={puzzle} alt="" />}
               </div>
               <div className={styles.time}>
                 {Math.floor(item.time / 60)

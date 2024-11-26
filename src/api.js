@@ -1,4 +1,4 @@
-﻿const baseUrl = "https://wedev-api.sky.pro/api";
+﻿const baseUrl = "https://wedev-api.sky.pro/api/v2";
 
 export const apiProvider = {
   getLeaderboard: () =>
