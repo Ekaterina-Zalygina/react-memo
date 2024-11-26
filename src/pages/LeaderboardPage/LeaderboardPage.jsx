@@ -10,8 +10,6 @@ import styles from "./LeaderboardPage.module.css";
 export function LeaderboardPage() {
   const leaderboard = useLeaderboard();
 
-  console.log(leaderboard);
-
   return (
     <div className={styles.container}>
       <div className={styles.header}>

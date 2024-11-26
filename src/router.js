@@ -17,10 +17,6 @@ export const router = createBrowserRouter(
       path: "/game/:pairsCount",
       element: <GamePage />,
     },
-    {
-      path: "/easy-game/:pairsCount",
-      element: <GamePage />,
-    },
   ],
   /**
    * basename нужен для корректной работы в gh pages

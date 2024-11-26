@@ -19,7 +19,7 @@ export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, 
     if (!hard) return false;
     if (!isWon) return false;
     const last = leaderboard[leaderboard.length - 1];
-    if (!last) return false;
+    if (!last) return true;
     return last.time > gameDurationSeconds;
   }
 

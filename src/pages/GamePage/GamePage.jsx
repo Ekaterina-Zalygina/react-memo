@@ -1,14 +1,16 @@
-import { useParams, useMatch } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import { Cards } from "../../components/Cards/Cards";
+import { useEasyMode } from "../../context/useEasyMode";
 
 export function GamePage() {
   const { pairsCount } = useParams();
-  const isEasy = useMatch("/easy-game/:pairsCount");
+
+  const { isEasyMode } = useEasyMode();
 
   return (
     <>
-      <Cards pairsCount={parseInt(pairsCount, 10)} previewSeconds={5} isEasy={isEasy} />
+      <Cards pairsCount={parseInt(pairsCount, 10)} previewSeconds={5} isEasy={isEasyMode} />
     </>
   );
 }

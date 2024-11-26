@@ -1,12 +1,18 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../../components/Button/Button";
 import styles from "./SelectLevelPage.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useEasyMode } from "../../context/useEasyMode";
 
 export function SelectLevelPage() {
   const [level, setLevel] = useState(null);
-  const [isEasyMode, setEasyMode] = useState(false);
   const navigate = useNavigate();
+
+  const { isEasyMode, setEasyMode } = useEasyMode();
+
+  useEffect(() => {
+    setEasyMode(false);
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -38,11 +44,7 @@ export function SelectLevelPage() {
         <Button
           disabled={level === null}
           onClick={() => {
-            if (isEasyMode) {
-              navigate(`/easy-game/${level}`);
-            } else {
-              navigate(`/game/${level}`);
-            }
+            navigate(`/game/${level}`);
           }}
         >
           Играть
